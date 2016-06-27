@@ -2,6 +2,9 @@
   "env": {
     "es6": true
   },
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "rules": {
     "strict" : 0,
     "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"} ],
