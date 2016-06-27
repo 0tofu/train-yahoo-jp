@@ -6,12 +6,14 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps-inline",
     "watch": "babel src --out-dir lib --watch --source-maps-inline",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mocha": "NODE_ENV=test mocha test/test_*.es6 --compilers js:babel-register "
   },
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "cheerio-httpcli": "^0.6.8"
+    "chai": "^3.5.0",
+    "cheerio-httpcli": "^0.6.8",
+    "mocha": "^2.5.3"
   },
   "devDependencies": {
     "babel": "^6.5.2",
