@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.4.1",
-    "cheerio-httpcli": "^0.6.8",
+    "cheerio-httpcli": "^0.6.8"
   },
   "devDependencies": {
     "babel": "^6.5.2",
