@@ -25,22 +25,22 @@ export default class Train {
   }
 
   getTrainInfo(name) {
+    let tInf = [];
     let nameUrls = this.findNameToUrl(name);
-    Promise.each(nameUrls, nameUrl => {
+    return Promise.each(nameUrls, nameUrl => {
       return client.fetch(nameUrl.url)
       .then(result => {
         // const trouble = result.$('#mdStatusTroubleLine .elmTblLstLine').text().replace(/\n/g, ''); // 近畿の情報
         const trainInfo = result.$('#mdServiceStatus dt').text();
         const replaceStr = result.$('#mdServiceStatus dt span').text();
-        console.log(nameUrl.name + ' => ' + trainInfo.replace(replaceStr, ''));
-        return trainInfo.replace(replaceStr, '');
+        tInf.push({
+          'name': nameUrl.name,
+          'jokyo': trainInfo.replace(replaceStr, ''),
+        });
       });
     })
     .then(() => {
-      console.log('done');
+      return tInf;
     });
   }
 }
-
-const train = new Train();
-train.getTrainInfo('京都');
