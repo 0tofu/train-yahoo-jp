@@ -4,9 +4,10 @@ import {Train} from '../src/';
 describe('train', () => {
   const train = new Train();
 
-  it ('getTrouble', () => {
-    return train.getTrouble().then((info) => {
-      expect(info).to.have.length.of.at.least(1);
+  it ('getTrainInfo', () => {
+    return train.getTrainInfo('京都').then((info) => {
+      // console.log(info);
+      // expect(info).to.have.length.of.at.least(1);
     });
   });
 });
