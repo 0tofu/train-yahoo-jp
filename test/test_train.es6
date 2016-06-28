@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {Train} from '../src';
+import {Train} from '../src/';
 
 describe('train', () => {
   const train = new Train();
