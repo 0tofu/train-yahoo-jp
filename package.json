@@ -12,9 +12,9 @@
   "directories": {
     "test": "test/"
   },
-  "files": {
+  "files": [
     "lib"
-  },
+  ],
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
   "license": "ISC",
   "dependencies": {
