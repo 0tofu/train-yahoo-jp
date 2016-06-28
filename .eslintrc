@@ -5,9 +5,14 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "extends": "eslint:recommended",
   "rules": {
     "strict" : 0,
-    "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"} ],
-    "no-comma-dangle" : 0
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"}],
+    comma-dangle: ["error", "always-multiline"]
   }
 }
