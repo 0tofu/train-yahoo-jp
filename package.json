@@ -13,6 +13,7 @@
     "test": "test/"
   },
   "files": [
+    "src",
     "lib"
   ],
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
