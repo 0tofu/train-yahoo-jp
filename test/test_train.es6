@@ -7,8 +7,7 @@ describe('train', () => {
   it ('getTrainInfo', function() {
     this.timeout(10000);
     return train.getTrainInfo('京都').then((info) => {
-      console.log(info);
-      // expect(info).to.have.length.of.at.least(1);
+      expect(info).to.have.lengthOf(2);
     });
   });
 });
