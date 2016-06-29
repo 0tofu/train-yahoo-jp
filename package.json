@@ -1,24 +1,22 @@
 {
-  "name": "train-yahoo-jp",
+  "name": "@otofu/train-yahoo-jp",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "description": "train information from yahoo.co.jp",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib --source-maps inline",
     "watch": "babel src --out-dir lib --watch --source-maps inline",
-    "mocha": "NODE_ENV=test mocha test/test_*.es6 --compilers js:babel-register ",
-    "install": "npm run build"
+    "mocha": "NODE_ENV=test mocha test/test_*.es6 --compilers js:babel-register "
   },
   "directories": {
     "test": "test/"
   },
   "files": [
-    "src",
     "lib"
   ],
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.1",
     "cheerio-httpcli": "^0.6.8"
