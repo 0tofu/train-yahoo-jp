@@ -7,7 +7,8 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps inline",
     "watch": "babel src --out-dir lib --watch --source-maps inline",
-    "mocha": "NODE_ENV=test mocha test/test_*.es6 --compilers js:babel-register "
+    "mocha": "NODE_ENV=test mocha test/test_*.es6 --compilers js:babel-register ",
+    "install": "npm run build"
   },
   "directories": {
     "test": "test/"
