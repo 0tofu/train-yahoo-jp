@@ -1,6 +1,6 @@
 {
   "name": "@otofu/train-yahoo-jp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "train information from yahoo.co.jp",
   "main": "lib/index.js",
