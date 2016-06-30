@@ -12,7 +12,7 @@ import extend from 'extend';
 const FILE_NAME = 'trainInfoUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
 
-co (function* () {
+co(function* () {
   let areaInf = {};
   let lineInf = {};
 
