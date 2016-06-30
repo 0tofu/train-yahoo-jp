@@ -1,5 +1,6 @@
 {
   "env": {
+    "node": true,
     "es6": true
   },
   "parserOptions": {
@@ -7,12 +8,14 @@
   },
   "extends": "eslint:recommended",
   "rules": {
-    "strict" : 0,
+    "comma-dangle": ["error", "always-multiline"],
+    "comma-spacing": [2, {"before": false, "after": true}],
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
+    "no-console": ["error", { allow: ["warn", "error"] }],
+    "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"}],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"}],
-    comma-dangle: ["error", "always-multiline"]
+    "strict" : [2, "global"]
   }
 }
