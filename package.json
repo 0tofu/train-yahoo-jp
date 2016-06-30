@@ -1,8 +1,9 @@
 {
   "name": "@otofu/train-yahoo-jp",
+  "description": "train information from yahoo.co.jp",
+  "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
   "version": "0.0.2",
   "private": false,
-  "description": "train information from yahoo.co.jp",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib --source-maps inline",
@@ -16,11 +17,16 @@
   "files": [
     "lib"
   ],
-  "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.otofu.xyz/otofu/train-yahoo-jp.git"
+  },
   "dependencies": {
     "bluebird": "^3.4.1",
-    "cheerio-httpcli": "^0.6.8"
+    "cheerio-httpcli": "^0.6.8",
+    "co": "^4.6.0",
+    "extend": "^3.0.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
