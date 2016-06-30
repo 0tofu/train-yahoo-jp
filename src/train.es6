@@ -1,5 +1,5 @@
 import client from 'cheerio-httpcli';
-import Promise from 'bluebird';
+import co from 'co';
 
 import trainInfoUrl from '../trainInfoUrl.json';
 
@@ -9,14 +9,14 @@ export default class Train {
 
   findNameToUrl(name) {
     let keys = [];
-    Object.keys(trainInfoUrl).forEach(key => {
-      if (key.indexOf(name) > -1) {
+    for (let line in trainInfoUrl) {
+      if (line.indexOf(name) > -1) {
         keys.push({
-          'name': key,
-          'url': trainInfoUrl[key],
+          'name': line,
+          'url': trainInfoUrl[line],
         });
       }
-    });
+    }
     if (keys.length === 0) {
       throw '該当の路線はありません。';
     }
@@ -26,17 +26,19 @@ export default class Train {
   getTrainInfo(name) {
     let tInf = [];
     let nameUrls = this.findNameToUrl(name);
-    return Promise.each(nameUrls, nameUrl => {
-      return client.fetch(nameUrl.url)
-      .then(result => {
+
+    return co(function* () {
+      for (let i = 0; i < nameUrls.length; i++) {
+        const result = yield client.fetch(nameUrls[i].url);
+        const $ = result.$;
         // const trouble = result.$('#mdStatusTroubleLine .elmTblLstLine').text().replace(/\n/g, ''); // 近畿の情報
-        const trainInfo = result.$('#mdServiceStatus dt').text();
-        const replaceStr = result.$('#mdServiceStatus dt span').text();
+        const trainInfo = $('#mdServiceStatus dt').text();
+        const replaceStr = $('#mdServiceStatus dt span').text();
         tInf.push({
-          'name': nameUrl.name,
+          'name': nameUrls[i].name,
           'jokyo': trainInfo.replace(replaceStr, ''),
         });
-      });
+      }
     })
     .then(() => {
       return tInf;

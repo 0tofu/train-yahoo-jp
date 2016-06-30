@@ -5,7 +5,7 @@ describe('train', () => {
   const train = new Train();
 
   it ('getTrainInfo', function() {
-    this.timeout(10000);
+    this.timeout(15000);
     return train.getTrainInfo('京都').then((info) => {
       expect(info).to.have.lengthOf(7);
     });
