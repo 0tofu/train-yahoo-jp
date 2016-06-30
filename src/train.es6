@@ -1,4 +1,3 @@
-'use strict';
 import client from 'cheerio-httpcli';
 import Promise from 'bluebird';
 

@@ -1,5 +1,5 @@
 import Train from './train';
 
 module.exports = {
-  Train: Train
+  Train: Train,
 };
