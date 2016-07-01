@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import mochaGenerators from 'mocha-generators';
 import {expect} from 'chai';
 import client from 'cheerio-httpcli';
