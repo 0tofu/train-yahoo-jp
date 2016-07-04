@@ -2,7 +2,7 @@
   "name": "@otofu/train-yahoo-jp",
   "description": "train information from yahoo.co.jp",
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "test": "test/"
   },
   "files": [
-    "lib"
+    "lib",
+    "trainInfoUrl.json"
   ],
   "license": "MIT",
   "repository": {
