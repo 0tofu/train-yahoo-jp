@@ -1,12 +1,4 @@
 {
-  "北海道": "http://transit.yahoo.co.jp/traininfo/area/2/",
-  "東北": "http://transit.yahoo.co.jp/traininfo/area/3/",
-  "関東": "http://transit.yahoo.co.jp/traininfo/area/4/",
-  "中部": "http://transit.yahoo.co.jp/traininfo/area/5/",
-  "近畿": "http://transit.yahoo.co.jp/traininfo/area/6/",
-  "中国": "http://transit.yahoo.co.jp/traininfo/area/8/",
-  "四国": "http://transit.yahoo.co.jp/traininfo/area/9/",
-  "九州": "http://transit.yahoo.co.jp/traininfo/area/7/",
   "函館本線[小樽～札幌]": "http://transit.yahoo.co.jp/traininfo/detail/9/9/",
   "函館本線[札幌～岩見沢]": "http://transit.yahoo.co.jp/traininfo/detail/9/10/",
   "函館本線[函館～長万部]": "http://transit.yahoo.co.jp/traininfo/detail/9/434/",

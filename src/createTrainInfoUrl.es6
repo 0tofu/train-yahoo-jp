@@ -7,7 +7,6 @@
 import fs from 'fs';
 import client  from 'cheerio-httpcli';
 import co from 'co';
-import extend from 'extend';
 
 const FILE_NAME = 'trainInfoUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
@@ -37,8 +36,7 @@ co(function* () {
     });
   }
 
-  let trainInf = extend(areaInf, lineInf);
-  fs.writeFileSync(FILE_NAME, JSON.stringify(trainInf, null, 2));
+  fs.writeFileSync(FILE_NAME, JSON.stringify(lineInf, null, 2));
 })
 .catch(err => {
   console.error(err);
