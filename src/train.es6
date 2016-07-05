@@ -18,29 +18,30 @@ export default class Train {
       }
     }
     if (keys.length === 0) {
-      throw '該当の路線はありません。';
+      return '該当の路線はありません。';
     }
     return keys;
   }
 
   getTrainInfo(name) {
-    let tInf = [];
     let nameUrls = this.findNameToUrl(name);
-
     return co(function* () {
+      let tInf = [];
       for (let i = 0; i < nameUrls.length; i++) {
         const result = yield client.fetch(nameUrls[i].url);
         const $ = result.$;
-        // const trouble = result.$('#mdStatusTroubleLine .elmTblLstLine').text().replace(/\n/g, ''); // 近畿の情報
+
         const trainInfo = $('#mdServiceStatus dt').text();
         const replaceStr = $('#mdServiceStatus dt span').text();
+        let status = trainInfo.replace(replaceStr, '').replace(/\n/g, '');
+        let trouble = $('#mdServiceStatus .trouble').text().replace(/\n/g, '');
+
         tInf.push({
           'name': nameUrls[i].name,
-          'jokyo': trainInfo.replace(replaceStr, ''),
+          'status': status,
+          'trouble': trouble,
         });
       }
-    })
-    .then(() => {
       return tInf;
     });
   }
