@@ -2,7 +2,7 @@
   "name": "@otofu/train-yahoo-jp",
   "description": "train information from yahoo.co.jp",
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "main": "lib/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.otofu.xyz/otofu/train-yahoo-jp.git"
+    "url": "https://github.com/0tofu/train-yahoo-jp.git"
   },
   "dependencies": {
     "cheerio-httpcli": "^0.6.8",
