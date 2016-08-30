@@ -1,7 +1,7 @@
 import client from 'cheerio-httpcli';
 import co from 'co';
 
-import trainInfoUrl from '../trainInfoUrl.json';
+import trainInfoUrl from '../files/trainInfoUrl.json';
 
 export default class Train {
   constructor() {

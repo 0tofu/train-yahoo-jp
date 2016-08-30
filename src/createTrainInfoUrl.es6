@@ -8,7 +8,7 @@ import fs from 'fs';
 import client  from 'cheerio-httpcli';
 import co from 'co';
 
-const FILE_NAME = 'trainInfoUrl.json';
+const FILE_NAME = __dirname + '/../files/trainInfoUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
 
 co(function* () {

@@ -1,6 +1,6 @@
 import client from 'cheerio-httpcli';
 import co from 'co';
-import in_file from '../trainInfoUrl.json';
+import in_file from '../files/trainInfoUrl.json';
 
 const train_url = in_file['阪急京都本線'];
 

@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import mochaGenerators from 'mocha-generators';
 import {expect} from 'chai';
 import client from 'cheerio-httpcli';
-import trainInfoUrl from '../trainInfoUrl.json';
+import trainInfoUrl from '../files/trainInfoUrl.json';
 
 mochaGenerators.install();
 
@@ -25,7 +25,6 @@ describe('trainInfoUrlList', () => {
 
     let results = yield checkLine;
     results.forEach(function(result) {
-      // console.log(result.$('title').text());
       const statusCode = result.response.statusCode;
       expect(statusCode).to.equal(200);
     });
