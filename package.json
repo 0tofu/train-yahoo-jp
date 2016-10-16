@@ -24,19 +24,19 @@
     "url": "https://github.com/0tofu/train-yahoo-jp.git"
   },
   "dependencies": {
-    "cheerio-httpcli": "^0.6.8",
+    "cheerio-httpcli": "^0.6.9",
     "co": "^4.6.0",
     "extend": "^3.0.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-cli": "^6.10.1",
-    "babel-core": "^6.10.4",
-    "babel-polyfill": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-register": "^6.14.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-register": "^6.16.3",
     "chai": "^3.5.0",
-    "mocha": "^3.0.2",
+    "mocha": "^3.1.2",
     "mocha-generators": "^1.2.0"
   }
 }
