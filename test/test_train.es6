@@ -6,7 +6,7 @@ describe('train', () => {
 
   it ('getTrainInfo', function() {
     this.timeout(15000);
-    return train.getTrainInfo('京都').then((info) => {
+    return train.getTrainInfoAtLine('京都').then((info) => {
       expect(info).to.have.lengthOf(7);
     });
   });

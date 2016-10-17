@@ -2,7 +2,7 @@
   "name": "@otofu/train-yahoo-jp",
   "description": "train information from yahoo.co.jp",
   "author": "Motoki Kobayashi <otofu.xxx@gmail.com>",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "main": "lib/index.js",
   "scripts": {

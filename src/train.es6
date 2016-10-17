@@ -1,6 +1,8 @@
 import client from 'cheerio-httpcli';
 import co from 'co';
 
+import utils from './utils';
+
 import stationListUrl from '../files/stationListUrl.json';
 import trainInfoUrl from '../files/trainInfoUrl.json';
 
@@ -12,6 +14,7 @@ export default class Train {
    * 駅名から路線名に変換する関数.
    *
    * @param string name
+   * @returns {*}
    */
   findStationNameToLineName(name) {
     let keys = {};
@@ -38,7 +41,13 @@ export default class Train {
     return keys;
   }
 
-  findNameToUrl(name) {
+  /**
+   * 路線名から路線情報のURLに変換する関数.
+   *
+   * @param string name 路線名
+   * @returns {*}
+   */
+  findLineNameToUrl(name) {
     let keys = [];
     for (let line in trainInfoUrl) {
       if (line.indexOf(name) > -1) {
@@ -54,8 +63,39 @@ export default class Train {
     return keys;
   }
 
-  getTrainInfo(name) {
-    let nameUrls = this.findNameToUrl(name);
+  getTrainInfoAtStation(name) {
+    const train = new Train();
+    co(function*() {
+      let stationLines = train.findStationNameToLineName(name);
+      let tInf = [];
+      for (let station in stationLines) {
+        const lines = stationLines[station];
+        for (let i = 0; i < lines.length; i++) {
+          const lineUrls = train.findLineNameToUrl(lines[i]);
+          for (let j = 0; j < lineUrls.length; j++) {
+            const $ = yield  utils.getData(lineUrls[j].url);
+
+            const trainInfo = $('#mdServiceStatus dt').text();
+            const replaceStr = $('#mdServiceStatus dt span').text();
+            let status = trainInfo.replace(replaceStr, '').replace(/\n/g, '');
+            let trouble = $('#mdServiceStatus .trouble').text().replace(/\n/g, '');
+
+            tInf.push({
+              'station_name': station,
+              'line_name': lineUrls[j].name,
+              'status': status,
+              'trouble': trouble,
+            });
+          }
+        }
+      }
+      console.log(tInf);
+      return tInf;
+    });
+  }
+
+  getTrainInfoAtLine(name) {
+    let nameUrls = this.findLineNameToUrl(name);
     return co(function* () {
       let tInf = [];
       for (let i = 0; i < nameUrls.length; i++) {
@@ -68,7 +108,8 @@ export default class Train {
         let trouble = $('#mdServiceStatus .trouble').text().replace(/\n/g, '');
 
         tInf.push({
-          'name': nameUrls[i].name,
+          'station_name': '',
+          'line_name': nameUrls[i].name,
           'status': status,
           'trouble': trouble,
         });
