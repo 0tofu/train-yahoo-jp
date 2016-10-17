@@ -1,10 +1,41 @@
 import client from 'cheerio-httpcli';
 import co from 'co';
 
+import stationListUrl from '../files/stationListUrl.json';
 import trainInfoUrl from '../files/trainInfoUrl.json';
 
 export default class Train {
   constructor() {
+  }
+
+  /**
+   * 駅名から路線名に変換する関数.
+   *
+   * @param string name
+   */
+  findStationNameToLineName(name) {
+    let keys = {};
+    let check_name;
+
+    name = name.trim();
+    name = name.replace(/\(/g, '\\(');
+    name = name.replace(/\)/g, '\\)');
+    
+    if (name.slice(-1) == "!" || name.slice(-1) == "！") {
+      check_name = new RegExp('^' + name.replace('!', '').replace('！', '') + '$');
+    } else {
+      check_name = new RegExp('.*' + name + '.*');
+    }
+
+    let lineList = Object.keys(stationListUrl);
+    for (let i = 0; i < lineList.length; i++) {
+      const station_name = lineList[i];
+      if (station_name.match(check_name)) {
+        keys[station_name] = stationListUrl[station_name].lines;
+      }
+    }
+
+    return keys;
   }
 
   findNameToUrl(name) {

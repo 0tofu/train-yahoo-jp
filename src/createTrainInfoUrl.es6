@@ -6,7 +6,8 @@
 
 import fs from 'fs';
 import client  from 'cheerio-httpcli';
-import co from 'co';
+import co from 'co'
+import utils from './utils';
 
 const FILE_NAME = __dirname + '/../files/trainInfoUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
@@ -24,7 +25,7 @@ co(function* () {
 
   // 各地方の路線情報URLより地方路線のURLを取得
   for (let area in areaInf) {
-    yield sleep(5000);
+    yield utils.sleep(5000);
     let result = yield client.fetch(areaInf[area]);
     let $ = result.$;
     $('#mdAreaMajorLine').find('a').map((i, el) => {
@@ -41,16 +42,3 @@ co(function* () {
 .catch(err => {
   console.error(err);
 });
-
-/**
- * 指定したミリ秒間処理を停止する関数
- * @param  {number} ms 時間(ミリ秒)
- * @return {Object}    Promise
- */
-function sleep(ms) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
-}

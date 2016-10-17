@@ -7,6 +7,7 @@
 import fs from 'fs';
 import client from 'cheerio-httpcli';
 import co from 'co';
+import utils from './utils';
 
 const stationListFile = __dirname + '/../files/stationListUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
@@ -22,10 +23,7 @@ co(function* () {
   let result = yield client.fetch(BASE_URL + '/station/top');
   let $ = result.$;
   $('.elmSearchItem').eq(0).find('li a').map((i, el) => {
-    const pref = $(el).text();
-   // if (pref == '大阪' || pref == '京都' || pref == '滋賀') {
-      pref_urls.push(getData($(el).url()));
-   // }
+    pref_urls.push(utils.getData($(el).url()));
   });
 
   // 都道府県別の路線URLを取得
@@ -33,7 +31,7 @@ co(function* () {
   results.map($ => {
     const pref = $('h1.title').text();
     pref_lines[pref] = $('.elmSearchItem.line > li a').map((i, el) => {
-      return getData($(el).url());
+      return utils.getData($(el).url());
     }).get();
   });
 
@@ -59,16 +57,16 @@ co(function* () {
     if (!Array.isArray(stations[index])) {
       stations[index] = [];
     }
-    stations[index].push(getData(stationLists[station_name].url));
+    stations[index].push(utils.getData(stationLists[station_name].url));
     if (stations[index].length == 100) {
       index++;
       console.log('sleep 3sec => ' + index);
-      yield sleep(3000);
+      yield utils.sleep(3000);
     }
   }
 
   for (let index in stations) {
-    yield sleep(500);
+    yield utils.sleep(500);
     const results = yield Promise.all(stations[index]);
     results.map($ => {
       let station_name = $('h1.title').text();
@@ -284,40 +282,4 @@ function replaceLineName(lines) {
   return_lines = Array.from(new Set(return_lines));
 
   return return_lines;
-}
-
-function getData(url) {
-  return new Promise((resolve, reject) => {
-    const maxRetryCount = 5;
-    co(function*() {
-      for (let i = 1; i <= maxRetryCount; i++) {
-        let result = {};
-        try {
-          result = yield client.fetch(url);
-        } catch (e) {
-          result = {error: e};
-        }
-
-        if (!result.error) {
-          resolve(result.$);
-          break;
-        }
-
-        console.log('*** Error ***, url => ' + url + ',  処理回数 => ' + i);
-        if (i == maxRetryCount) {
-          console.log('Error => ' + url);
-          reject(new Error(result.error));
-        }
-        yield sleep(5000);
-      }
-    });
-  });
-}
-
-function sleep(ms) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
 }
