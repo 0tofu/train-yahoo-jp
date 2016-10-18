@@ -65,7 +65,7 @@ export default class Train {
 
   getTrainInfoAtStation(name) {
     const train = new Train();
-    co(function*() {
+    return co(function*() {
       let stationLines = train.findStationNameToLineName(name);
       let tInf = [];
       for (let station in stationLines) {
@@ -89,7 +89,6 @@ export default class Train {
           }
         }
       }
-      console.log(tInf);
       return tInf;
     });
   }
