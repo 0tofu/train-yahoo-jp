@@ -1,7 +1,7 @@
 import client from 'cheerio-httpcli';
 import co from 'co';
 
-import utils from './utils';
+import utils from './common/utils';
 
 import stationListUrl from '../files/stationListUrl.json';
 import trainInfoUrl from '../files/trainInfoUrl.json';

@@ -5,11 +5,10 @@
  */
 
 import fs from 'fs';
-import client  from 'cheerio-httpcli';
 import co from 'co'
-import utils from './utils';
+import uitls from '../common/utils';
 
-const FILE_NAME = __dirname + '/../files/trainInfoUrl.json';
+const FILE_NAME = __dirname + '/../../files/trainInfoUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
 
 co(function* () {
@@ -17,20 +16,20 @@ co(function* () {
   let lineInf = {};
 
   // 元となるURLより各地方の路線情報URLを取得
-  let result = yield client.fetch(BASE_URL);
-  let $ = result.$;
+  const $ = yield uitls.getData(BASE_URL);
   $('.elmTblLstTrain tr').eq(0).find('a').map((i, el) => {
     areaInf[$(el).text()] = BASE_URL + $(el).attr('href');
   });
 
   // 各地方の路線情報URLより地方路線のURLを取得
   for (let area in areaInf) {
-    yield utils.sleep(5000);
-    let result = yield client.fetch(areaInf[area]);
-    let $ = result.$;
+    console.log(area);
+    yield uitls.sleep(5000);
+    const $ = yield uitls.getData(areaInf[area]);
     $('#mdAreaMajorLine').find('a').map((i, el) => {
       let lineName = $(el).text();
       let lineUrl = $(el).attr('href');
+      console.log(lineName + ' => ' + lineUrl);
       if (lineUrl.indexOf(BASE_URL) > -1) {
         lineInf[lineName] = lineUrl;
       }

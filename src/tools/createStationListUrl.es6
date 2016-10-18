@@ -5,14 +5,11 @@
  */
 
 import fs from 'fs';
-import client from 'cheerio-httpcli';
 import co from 'co';
-import utils from './utils';
+import utils from '../common/utils';
 
-const stationListFile = __dirname + '/../files/stationListUrl.json';
+const stationListFile = __dirname + '/../../files/stationListUrl.json';
 const BASE_URL = 'http://transit.yahoo.co.jp';
-
-client.timeout = 120000;
 
 co(function* () {
   let pref_urls = [];
@@ -20,8 +17,7 @@ co(function* () {
   let stationLists = {};
 
   // 駅情報ページにアクセスし都道府県URLを取得
-  let result = yield client.fetch(BASE_URL + '/station/top');
-  let $ = result.$;
+  const $ = yield uitls.getData(BASE_URL + '/station/top');
   $('.elmSearchItem').eq(0).find('li a').map((i, el) => {
     pref_urls.push(utils.getData($(el).url()));
   });
