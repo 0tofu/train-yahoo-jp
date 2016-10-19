@@ -21,9 +21,8 @@ export default class Train {
     let check_name;
 
     name = name.trim();
-    name = name.replace(/\(/g, '\\(');
-    name = name.replace(/\)/g, '\\)');
-    
+    name = utils.preg_quote(name, '');
+
     if (name.slice(-1) == "!" || name.slice(-1) == "！") {
       check_name = new RegExp('^' + name.replace('!', '').replace('！', '') + '$');
     } else {
@@ -39,6 +38,40 @@ export default class Train {
     }
 
     return keys;
+  }
+
+  /**
+   * 路線名から路線内の駅リストを取得する関数.
+   */
+  findLineToStation(name) {
+    let lineStationList = [];
+
+    name = name.trim();
+    name = utils.preg_quote(name, '');
+
+    let check_name ='';
+    if (name.slice(-1) == "!" || name.slice(-1) == "！") {
+      check_name = new RegExp('^' + name.replace('!', '').replace('！', '') + '$');
+    } else {
+      check_name = new RegExp('.*' + name + '.*');
+    }
+
+    const stationList = Object.keys(stationListUrl);
+    for (let i = 0; i < stationList.length; i++) {
+      const station_name = stationList[i];
+      const lines = stationListUrl[station_name].lines;
+      lines.forEach(line => {
+        if (line.match(check_name)) {
+          if (!(line in lineStationList)) {
+            lineStationList[line] = [];
+          }
+          lineStationList[line].push(station_name);
+          return;
+        }
+      });
+    }
+
+    return lineStationList;
   }
 
   /**
