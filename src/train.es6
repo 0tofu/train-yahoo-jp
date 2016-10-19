@@ -18,13 +18,13 @@ export default class Train {
    */
   findStationNameToLineName(name) {
     let keys = {};
-    let check_name;
 
     name = name.trim();
     name = utils.preg_quote(name, '');
 
-    if (name.slice(-1) == "!" || name.slice(-1) == "！") {
-      check_name = new RegExp('^' + name.replace('!', '').replace('！', '') + '$');
+    let check_name;
+    if (name.slice(-2) == "\\!"  || name.slice(-1) == "！") {
+      check_name = new RegExp('^' + name.replace('\\!', '').replace('！', '') + '$');
     } else {
       check_name = new RegExp('.*' + name + '.*');
     }
@@ -50,8 +50,8 @@ export default class Train {
     name = utils.preg_quote(name, '');
 
     let check_name ='';
-    if (name.slice(-1) == "!" || name.slice(-1) == "！") {
-      check_name = new RegExp('^' + name.replace('!', '').replace('！', '') + '$');
+    if (name.slice(-2) == "\\!"  || name.slice(-1) == "！") {
+      check_name = new RegExp('^' + name.replace('\\!', '').replace('！', '') + '$');
     } else {
       check_name = new RegExp('.*' + name + '.*');
     }
@@ -166,3 +166,7 @@ export default class Train {
     });
   }
 }
+
+const train = new Train();
+const result = train.findStationNameToLineName('大阪!');
+console.log(result);
